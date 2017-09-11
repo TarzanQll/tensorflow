@@ -1,7 +1,8 @@
-#coding=utf-8
+# coding=utf-8
 import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets("data/", one_hot=True)
+import Utils.DataSource as ds
+
+mnist = ds.readMnist("data/")
 
 x = tf.placeholder(tf.float32, [None, 784])
 W = tf.Variable(tf.zeros([784, 10]))

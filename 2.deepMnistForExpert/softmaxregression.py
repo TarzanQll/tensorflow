@@ -1,9 +1,9 @@
 # coding=utf-8
 # build a softmax regression model
-from tensorflow.examples.tutorials.mnist import input_data
 import tensorflow as tf
+import Utils.DataSource as ds
 
-mnist = input_data.read_data_sets('data/', one_hot=True)
+mnist = ds.readMnist("data/")
 
 # using InteractiveSession for interleave operations when building a computation graph
 sess = tf.InteractiveSession()
@@ -21,7 +21,8 @@ sess.run(tf.global_variables_initializer())
 
 # predicted class and loss function
 y = tf.matmul(x, W) + b
-cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(y, y_))
+# cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(y, y_))
+cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = y, labels = y_))
 
 #  use steepest gradient descent, with a step length of 0.5, to descend the cross entropy.
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
